@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Predict/View room generation for BTROOMS.">
+    <meta property="og:title" content="Room Generation Predictor">
+    <meta property="og:description" content="Room generation previewer for BTROOMS">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <title>BTROOMS - Room Generation Viewer</title>
+
+</head>
+<body>
+    <div class="centerInsta">
+        <img src="images/btloghShorter.png">
+    </div>
+    <div class="container">
+        <header>
+            
+            <h1 class="ac2">Room Generation Previewer [BETA]</h1>
+            <p class="ac2">SITE VER: 1 : GAMEGEN VER: RoomGenV6 -- Get approximate room generation types for each floor. (NOTICE: THINGS MAY BE INNACURATE)</p>
+            <br>
+            <p class="ac2">This only works for RoomGenV6.</p>
+        </header>
+
+        <div class="controls">
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="seed">Seed</label>
+                    <input type="number" id="seed" value="314159265" min="1" max="999999999">
+                </div>
+                
+                <div class="input-group">
+                    <label for="floor">Floor</label>
+                    <select id="floor">
+                        <option value="A">Floor A - The Office</option>
+                        <option value="C">Floor C - The Crossroads</option>
+                        <option value="Retro">RETRO Rooms</option>
+                        <option value="B">Floor B - The Basement</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label for="roomCount">Room Amount</label>
+                    <input type="number" id="roomCount" value="100" min="1" max="1000">
+                </div>
+            </div>
+
+            <button id="generateBtn">Preview Seed</button>
+            <br><br>
+            <button id="randomBtn">Random Seed</button>
+            <br><br>
+            <button id="finderToggle">Seed Finder v</button>
+            <br><br>
+            <button id="rareSeedsToggle">Notable Seeds v</button>
+        </div>
+
+        <div id="rareSeeds" class="rare-seeds">
+            <h2 class="results-header">Notable Seeds</h2>
+            <p class="subtitle">Some seeds that I believe should be well-noted of. Usually found via Seed Finder/brute forcing seeds.</p>
+            <div id="rareSeedsGrid" class="rare-seeds-grid"></div>
+        </div>
+
+        <div id="seedFinder" class="seed-finder">
+            <h2 class="results-header">Seed Finder</h2>
+            <p class="subtitle">Scan up to a billion seeds that can match any preferred filter</p>
+            
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="finderFloor">Floor</label>
+                    <select id="finderFloor">
+                        <option value="A">Floor A - The Office</option>
+                        <option value="C">Floor C - The Crossroads</option>
+                        <option value="Retro">RETRO Rooms</option>
+                        <option value="B">Floor B - The Basement</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label for="finderRoomCount">Room Count</label>
+                    <input type="number" id="finderRoomCount" value="100" min="1" max="1000">
+                </div>
+            </div>
+
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="minEasterEggs">Min Easter Eggs</label>
+                    <input type="number" id="minEasterEggs" value="0" min="0" max="100">
+                </div>
+                
+                <div class="input-group">
+                    <label for="maxEasterEggs">Max Easter Eggs</label>
+                    <input type="number" id="maxEasterEggs" value="999" min="0" max="999">
+                </div>
+            </div>
+
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="moonSizeMin">Min Moon Size</label>
+                    <input type="number" id="moonSizeMin" value="3" min="3" max="12">
+                </div>
+                
+                <div class="input-group">
+                    <label for="moonSizeMax">Max Moon Size</label>
+                    <input type="number" id="moonSizeMax" value="12" min="3" max="12">
+                </div>
+            </div>
+
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="maxAttempts">Max Attempts</label>
+                    <input type="number" id="maxAttempts" value="10000" min="100" max="1000000">
+                </div>
+                
+                <div class="input-group">
+                    <label for="targetRoom">Target Room (optional)</label>
+                    <input type="text" id="targetRoom" placeholder="e.g., Locker-Hallway">
+                </div>
+            </div>
+
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="minTargetCount">Min Target Room Count</label>
+                    <input type="number" id="minTargetCount" value="0" min="0" max="100">
+                </div>
+            </div>
+
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="seedMode">Search Mode</label>
+                    <select id="seedMode">
+                        <option value="random">Random Seeds</option>
+                        <option value="sequential">Sequential (Start from 1)</option>
+                        <option value="custom">Custom Start Point</option>
+                    </select>
+                </div>
+                
+                <div class="input-group" id="customStartGroup" style="display: none;">
+                    <label for="customStart">Start Seed</label>
+                    <input type="number" id="customStart" value="1" min="1" max="999999999">
+                </div>
+            </div>
+
+            <div class="finder-buttons">
+                <button id="searchButton">Start Search</button>
+                <button id="stopButton" disabled>Stop Search</button>
+            </div>
+            <br>
+
+            <p class="forceMiddle">This can be a bit resource intensive... use a smaller number to save resources!</p>
+
+            <div class="finder-status" id="finderStatus"></div>
+            <div class="finder-results" id="finderResults"></div>
+        </div>
+
+        <div id="results" class="results">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalRooms">0</div>
+                    <div class="stat-label">Total Rooms</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="easterEggs">0</div>
+                    <div class="stat-label">Easter Eggs</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="majorRooms">0</div>
+                    <div class="stat-label">Major Rooms</div>
+                </div>
+                <div class="stat-card moon-card">
+                    <div class="moon-container">
+                        <img src="images/moon.png" id="moonImage" alt="Moon">
+                    </div>
+                    <div class="stat-value" id="moonSize">0</div>
+                    <div class="stat-label">Moon Size</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-value" id="mostCommonName">—</div>
+                    <img id="mostCommonImg" class="stat-room-img">
+                    <div class="stat-label">Most Common Room</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-value" id="leastCommonName">—</div>
+                    <img id="leastCommonImg" class="stat-room-img">
+                    <div class="stat-label">Least Common Room</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-value" id="uniquenessScore">0%</div>
+                    <div class="stat-label">Seed Uniqueness 
+                        <br>
+                        <br>
+                        <p>Higher = More Unique, Lower = Less Unique/Common</p></div>
+                </div>
+            </div>
+
+            <h2 class="results-header">Estimated Map</h2>
+            <div id="roomGrid" class="room-grid"></div>
+        </div>
+    </div>
+
+    <h1 class="autoCenter">Made with ❤️ by giggledumm</h1>
+    <p class="autoCenter">This is an official BTROOMS tool.</p>
+
+    <script src="script.js"></script>
+</body>
+</html>

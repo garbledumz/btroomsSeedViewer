@@ -1,0 +1,468 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Inconsolata', system-ui, sans-serif;
+    background: #0a0a0a;
+    color: #e0e0e0;
+    min-height: 100vh;
+    padding: 32px 16px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #1f1f1f;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+}
+
+.subtitle {
+    font-size: 15px;
+    color: #888888;
+    font-weight: 400;
+}
+
+
+
+.controls {
+    background: #111111;
+    border: 1px solid #1f1f1f;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 32px;
+}
+
+.input-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.forceMiddle {
+    text-align: center;
+}
+
+.input-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: #cccccc;
+    margin-bottom: 8px;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    background: #0a0a0a;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 15px;
+    color: #ffffff;
+    font-family: inherit;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    outline: none;
+    border-color: #3a3a3a;
+}
+
+button {
+    width: 100%;
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #ffffff;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+button:hover {
+    background: #222222;
+    border-color: #3a3a3a;
+}
+
+button:active {
+    background: #1a1a1a;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.stat-card {
+    background: #111111;
+    border: 1px solid #1f1f1f;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.moon-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.moon-container {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+.moon-container img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    
+}
+
+.seed-finder {
+    background: #111111;
+    border: 1px solid #1f1f1f;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 32px;
+    display: none;
+}
+
+.centerInsta {
+    text-align: center;
+    scale: 0.3;
+}
+
+.seed-finder.visible {
+    display: block;
+}
+
+.finder-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.finder-status {
+    margin-top: 16px;
+    padding: 12px;
+    background: #0a0a0a;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #cccccc;
+    min-height: 40px;
+}
+
+.finder-results {
+    margin-top: 16px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.seed-result-card {
+    background: #0a0a0a;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 8px;
+}
+
+.seed-result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.seed-result-header button {
+    width: auto;
+    padding: 8px 16px;
+    font-size: 13px;
+}
+
+.seed-result-stats {
+    font-size: 13px;
+    color: #888888;
+}
+
+.autoCenter {
+    text-align: center;
+    margin-top: 48px;
+    font-size: 16px;
+    color: #888888;
+}
+
+.ac2 {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 36px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 13px;
+    color: #888888;
+    font-weight: 500;
+}
+
+.results-header {
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 16px;
+}
+
+.room-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.room-card {
+    background: #111111;
+    border: 1px solid #1f1f1f;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.room-image {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    background: #0a0a0a;
+}
+
+.room-content {
+    padding: 16px;
+}
+
+.room-number {
+    font-size: 13px;
+    font-weight: 600;
+    color: #888888;
+    margin-bottom: 4px;
+}
+
+.room-name {
+    font-size: 15px;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.autoCenter {
+    text-align: center;
+}
+
+.stat-room-img{
+    width:48px;
+    height:48px;
+    margin:6px auto;
+    object-fit:cover;
+    border-radius:6px;
+}
+
+
+.room-card.major {
+    border-color: #8b0000;
+}
+
+.room-card.easter {
+    border: 10px double;
+    border-color: #8eff8e;
+    
+}
+
+.room-card.special {
+    border-color: #8b6914;
+}
+
+.results {
+    display: none;
+}
+
+.results.visible {
+    display: block;
+}
+
+.rare-seeds {
+    background: #111111;
+    border: 1px solid #1f1f1f;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 32px;
+    display: none;
+}
+
+.rare-seeds.visible {
+    display: block;
+}
+
+.rare-seeds-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.rare-seed-card {
+    background: #0a0a0a;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.rare-seed-card.nightmare {
+    border-color: #8b0000;
+}
+
+.rare-seed-card.hard {
+    border-color: #d97706;
+}
+
+.rare-seed-card.normal {
+    border-color: #2a2a2a;
+}
+
+.rare-seed-card.easy {
+    border-color: #16a34a;
+}
+
+.rare-seed-card.peaceful {
+    border-color: #0284c7;
+}
+
+.rare-seed-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.rare-seed-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.rarity-badge {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.rarity-badge.legendary {
+    color: #fbbf24;
+}
+
+.rarity-badge.epic {
+    color: #a855f7;
+}
+
+.rarity-badge.rare {
+    color: #3b82f6;
+}
+
+.rarity-badge.uncommon {
+    color: #10b981;
+}
+
+.rarity-badge.common {
+    color: #6b7280;
+}
+
+.difficulty-badge {
+    font-size: 11px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.difficulty-badge.nightmare {
+    background: #8b0000;
+    color: #ffffff;
+}
+
+.difficulty-badge.hard {
+    background: #d97706;
+    color: #ffffff;
+}
+
+.difficulty-badge.normal {
+    background: #6b7280;
+    color: #ffffff;
+}
+
+.difficulty-badge.easy {
+    background: #16a34a;
+    color: #ffffff;
+}
+
+.difficulty-badge.peaceful {
+    background: #0284c7;
+    color: #ffffff;
+}
+
+.rare-seed-description {
+    font-size: 13px;
+    color: #888888;
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+
+.rare-seed-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.rare-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.rare-stat-label {
+    font-size: 11px;
+    color: #666666;
+    font-weight: 500;
+}
+
+.rare-stat-value {
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.rare-seed-card button {
+    width: 100%;
+}
